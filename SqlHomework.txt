@@ -1,33 +1,271 @@
-Notepad++ v7.6.6 bug-fix:
+USE [master]
+GO
+/****** Object:  Database [P210]    Script Date: 5/11/2019 16:16:22 ******/
+CREATE DATABASE [P210]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'P210', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL13.SQLEXPRESS\MSSQL\DATA\P210.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'P210_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL13.SQLEXPRESS\MSSQL\DATA\P210_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
+ALTER DATABASE [P210] SET COMPATIBILITY_LEVEL = 130
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [P210].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [P210] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [P210] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [P210] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [P210] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [P210] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [P210] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [P210] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [P210] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [P210] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [P210] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [P210] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [P210] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [P210] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [P210] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [P210] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [P210] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [P210] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [P210] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [P210] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [P210] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [P210] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [P210] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [P210] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [P210] SET  MULTI_USER 
+GO
+ALTER DATABASE [P210] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [P210] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [P210] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [P210] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [P210] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [P210] SET QUERY_STORE = OFF
+GO
+USE [P210]
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 0;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = ON;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
+GO
+USE [P210]
+GO
+/****** Object:  Table [dbo].[BRANDS]    Script Date: 5/11/2019 16:16:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BRANDS](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[CategoryID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CATEGORIES]    Script Date: 5/11/2019 16:16:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CATEGORIES](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ORDERS]    Script Date: 5/11/2019 16:16:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ORDERS](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[UserID] [int] NOT NULL,
+	[ProductID] [int] NOT NULL,
+	[ProductCount] [int] NOT NULL,
+	[OrderDate] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PRODUCT]    Script Date: 5/11/2019 16:16:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PRODUCT](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Price] [float] NOT NULL,
+	[CategoryID] [int] NOT NULL,
+	[BrandID] [int] NOT NULL,
+	[Color] [nvarchar](50) NOT NULL,
+	[Barcod] [nvarchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[STOCK]    Script Date: 5/11/2019 16:16:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[STOCK](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ProductID] [int] NOT NULL,
+	[Count] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[USERS]    Script Date: 5/11/2019 16:16:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[USERS](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Surname] [nvarchar](50) NOT NULL,
+	[Username] [nvarchar](50) NOT NULL,
+	[Email] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[BRANDS] ON 
 
-1. Fix crash issue inserted by adding an enhancement for retaining read only setting state in session.
+INSERT [dbo].[BRANDS] ([ID], [Name], [CategoryID]) VALUES (1, N'IPHONE', 1)
+INSERT [dbo].[BRANDS] ([ID], [Name], [CategoryID]) VALUES (2, N'Samsung', 2)
+INSERT [dbo].[BRANDS] ([ID], [Name], [CategoryID]) VALUES (3, N'HTC', 3)
+INSERT [dbo].[BRANDS] ([ID], [Name], [CategoryID]) VALUES (4, N'Vertu', 4)
+SET IDENTITY_INSERT [dbo].[BRANDS] OFF
+SET IDENTITY_INSERT [dbo].[CATEGORIES] ON 
 
+INSERT [dbo].[CATEGORIES] ([ID], [Name]) VALUES (1, N'Phones')
+INSERT [dbo].[CATEGORIES] ([ID], [Name]) VALUES (2, N'Phones')
+INSERT [dbo].[CATEGORIES] ([ID], [Name]) VALUES (3, N'Notebooks')
+INSERT [dbo].[CATEGORIES] ([ID], [Name]) VALUES (4, N'Watchs')
+INSERT [dbo].[CATEGORIES] ([ID], [Name]) VALUES (5, N'Cars')
+SET IDENTITY_INSERT [dbo].[CATEGORIES] OFF
+SET IDENTITY_INSERT [dbo].[ORDERS] ON 
 
-Notepad++ v7.6.5 new features and bug-fixes:
+INSERT [dbo].[ORDERS] ([ID], [UserID], [ProductID], [ProductCount], [OrderDate]) VALUES (1, 1, 2, 1, CAST(N'2015-05-10T00:00:00.000' AS DateTime))
+INSERT [dbo].[ORDERS] ([ID], [UserID], [ProductID], [ProductCount], [OrderDate]) VALUES (5, 3, 4, 2, CAST(N'2011-10-11T00:00:00.000' AS DateTime))
+INSERT [dbo].[ORDERS] ([ID], [UserID], [ProductID], [ProductCount], [OrderDate]) VALUES (10, 4, 5, 3, CAST(N'2018-05-25T00:00:00.000' AS DateTime))
+SET IDENTITY_INSERT [dbo].[ORDERS] OFF
+SET IDENTITY_INSERT [dbo].[PRODUCT] ON 
 
-0.  Security enhancement: GPG Signature is provided for Notepad++ release.
-1.  Fix a long waiting issue about file auto change detection: enhance "File status Auto-Detection" to avoid switching editing tab off behaviour.
-2.  Fix encoding (language) detection regressions since v7.6.
-3.  Fix a regression: double-clicking on a "find all in current document" result for an unsaved doc prompts to save it.
-4.  Added close all unchanged tabs command.
-5.  Restore deleted "Launch in browser" customized shortcuts in EU-FOSSA bounty program by implementing them in more secure way: Add "View Current File in Browser" for Firefox, Chrome, IE & Edge.
-6.  Retain read only setting state in session.
-7.  Enhancement: after file reload user can still undo.
-8.  Fix a bug in command "Remove Consecutive Duplicate Lines" and make it work with old Macintosh EOL.
-9.  Fix UDL language marker bullet position, if UDL Name exceeds 14 characters, extend UDL names to max 64 characters.
-10. Enhance external call code to avoid eventual arbitrary commands execution. (EURO-FOSSA)
-11. Fix crash issue by command "On Selection->Open File" while the number of selected characters is exceed 2048. (EURO-FOSSA)
-12. Fix crash issue of User Define dialog while deleting a unallocated entry. (EURO-FOSSA)
-13. Fix crash issue on shortcut command while its length exceed 260. (EURO-FOSSA)
-14. Add an enhancement on "Open..." command to prevent from the eventual crash. (EURO-FOSSA)
-15. Fix stack Buffer Overflow in Command::extractArgs. (EURO-FOSSA)
+INSERT [dbo].[PRODUCT] ([ID], [Name], [Price], [CategoryID], [BrandID], [Color], [Barcod]) VALUES (2, N'Phone', 1200, 1, 1, N'Black', N'A0001')
+INSERT [dbo].[PRODUCT] ([ID], [Name], [Price], [CategoryID], [BrandID], [Color], [Barcod]) VALUES (4, N'Phone', 2000, 2, 2, N'White', N'A0002')
+INSERT [dbo].[PRODUCT] ([ID], [Name], [Price], [CategoryID], [BrandID], [Color], [Barcod]) VALUES (5, N'Watch', 200, 3, 3, N'Black', N'A0003')
+INSERT [dbo].[PRODUCT] ([ID], [Name], [Price], [CategoryID], [BrandID], [Color], [Barcod]) VALUES (6, N'Notebook', 1600, 4, 4, N'Grey', N'A0004')
+SET IDENTITY_INSERT [dbo].[PRODUCT] OFF
+SET IDENTITY_INSERT [dbo].[STOCK] ON 
 
-Included plugins:
+INSERT [dbo].[STOCK] ([ID], [ProductID], [Count]) VALUES (3, 1, 5)
+INSERT [dbo].[STOCK] ([ID], [ProductID], [Count]) VALUES (4, 2, 7)
+INSERT [dbo].[STOCK] ([ID], [ProductID], [Count]) VALUES (5, 3, 9)
+INSERT [dbo].[STOCK] ([ID], [ProductID], [Count]) VALUES (6, 4, 13)
+SET IDENTITY_INSERT [dbo].[STOCK] OFF
+SET IDENTITY_INSERT [dbo].[USERS] ON 
 
-1.  NppExport v0.2.8 (32-bit x86 only)
-2.  Converter 4.2.1
-3.  Mime Tool 2.5
-
-Updater (Installer only):
-
-* WinGup (for Notepad++) v5.1
+INSERT [dbo].[USERS] ([ID], [Name], [Surname], [Username], [Email], [Password]) VALUES (1, N'Heyder', N'Elekberli', N'Heyder13', N'HeydarRa@code.edu.az', N'test123')
+INSERT [dbo].[USERS] ([ID], [Name], [Surname], [Username], [Email], [Password]) VALUES (2, N'Parvin', N'Pashazade', N'Parvin555', N'ParvinRa@code.edu.az', N'test1234')
+INSERT [dbo].[USERS] ([ID], [Name], [Surname], [Username], [Email], [Password]) VALUES (3, N'Ayaz', N'Mehdiyev', N'Ayaz444', N'AyazRa@code.edu.az', N'test12345')
+INSERT [dbo].[USERS] ([ID], [Name], [Surname], [Username], [Email], [Password]) VALUES (4, N'Elnur', N'Hasanzade', N'Elnur333', N'ElnurHa@code.edu.az', N'test123456')
+INSERT [dbo].[USERS] ([ID], [Name], [Surname], [Username], [Email], [Password]) VALUES (5, N'Farid', N'Mammadli', N'Farid999', N'FaridMa@code.edu.az', N'test1234567')
+INSERT [dbo].[USERS] ([ID], [Name], [Surname], [Username], [Email], [Password]) VALUES (6, N'Akber', N'Amanov', N'Akbar666', N'AkbarMa@code.edu.az', N'test12345678')
+SET IDENTITY_INSERT [dbo].[USERS] OFF
+/****** Object:  Index [UQ__BRANDS__19093A2A6403DB14]    Script Date: 5/11/2019 16:16:28 ******/
+ALTER TABLE [dbo].[BRANDS] ADD UNIQUE NONCLUSTERED 
+(
+	[CategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [UQ__ORDERS__1788CCADB24AC51A]    Script Date: 5/11/2019 16:16:28 ******/
+ALTER TABLE [dbo].[ORDERS] ADD UNIQUE NONCLUSTERED 
+(
+	[UserID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [UQ__ORDERS__B40CC6ECD59B6C43]    Script Date: 5/11/2019 16:16:28 ******/
+ALTER TABLE [dbo].[ORDERS] ADD UNIQUE NONCLUSTERED 
+(
+	[ProductID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [UQ__PRODUCT__19093A2A0785873C]    Script Date: 5/11/2019 16:16:28 ******/
+ALTER TABLE [dbo].[PRODUCT] ADD UNIQUE NONCLUSTERED 
+(
+	[CategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [UQ__PRODUCT__DAD4F3BF8B5A9B1D]    Script Date: 5/11/2019 16:16:28 ******/
+ALTER TABLE [dbo].[PRODUCT] ADD UNIQUE NONCLUSTERED 
+(
+	[BrandID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [UQ__STOCK__B40CC6ECCCF12CC6]    Script Date: 5/11/2019 16:16:28 ******/
+ALTER TABLE [dbo].[STOCK] ADD UNIQUE NONCLUSTERED 
+(
+	[ProductID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+USE [master]
+GO
+ALTER DATABASE [P210] SET  READ_WRITE 
+GO
