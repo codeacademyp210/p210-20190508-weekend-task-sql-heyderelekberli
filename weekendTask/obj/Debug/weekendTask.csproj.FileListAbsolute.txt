@@ -1,0 +1,12 @@
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\bin\Debug\weekendTask.exe.config
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\bin\Debug\weekendTask.exe
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\bin\Debug\weekendTask.pdb
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\obj\Debug\weekendTask.csprojAssemblyReference.cache
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\obj\Debug\weekendTask.Form1.resources
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\obj\Debug\weekendTask.Properties.Resources.resources
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\obj\Debug\weekendTask.csproj.GenerateResource.cache
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\obj\Debug\weekendTask.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\obj\Debug\weekendTask.exe
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\obj\Debug\weekendTask.pdb
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\obj\Debug\weekendTask.Form3.resources
+C:\Users\Acer\Desktop\hl\weekendTaskProject\weekendTask\obj\Debug\weekendTask.Form2.resources
